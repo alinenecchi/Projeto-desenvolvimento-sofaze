@@ -8,9 +8,13 @@ jobs:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
     steps:
-      - run: cd sofaze/
       - uses: actions/checkout@v2
-      - run: npm install
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: '18.x'
+          cache: 'yarn'
+          cache-dependency-path: './sofaze/yarn.lock'
       - run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:

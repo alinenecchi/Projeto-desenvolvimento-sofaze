@@ -231,12 +231,12 @@ export default function Login() {
               </Grid>
               <Grid container mt={10}>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <Link className="link" href="#" variant="body2">
                     Esqueceu a senha?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link to="/register" variant="body2">
+                  <Link className="link" to="/register" variant="body2">
                     {"Não tem uma conta? Inscrever-se!"}
                   </Link>
                 </Grid>

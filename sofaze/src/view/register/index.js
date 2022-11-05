@@ -54,11 +54,47 @@ export default function Register() {
           sendEmailVerification(auth.currentUser)
             .then(() => {
               setTimeActive(true);
+              setMsgType("sucesso");
               navigate("/verify-email");
             })
-            .catch((err) => alert(err.message));
+            .catch((error) => {
+              setMsgType("error");
+              alert(error.message);
+              console.log(error.message);
+              switch (error.message) {
+                default:
+                  setMsg("Um erro ocorreu. Tente novamente mais tarde!");
+              }
+            });
         })
-        .catch((err) => setError(err.message));
+        .catch((error) => {
+          alert(error.message);
+          console.log(error.message);
+          setMsgType("error");
+          switch (error.message) {
+            case "Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).":
+              setMsg(
+                "O acesso a esta conta foi temporariamente desativado devido a muitas tentativas de login com falha. Você pode restaurá-lo imediatamente redefinindo sua senha ou pode tentar novamente mais tarde."
+              );
+              break;
+            case "Firebase: Error (auth/wrong-password).":
+              setMsg("Senha inválida");
+              break;
+            case "Firebase: Error (auth/user-not-found).":
+              setMsg("Este usuário não é válido!");
+              break;
+            case "The email address is already in use by another account":
+              setMsg("Este email já está sendo utilizado por outro usuário.");
+              break;
+            case "Firebase: Error (auth/invalid-email).":
+              setMsg("O formato do seu email ou senha é inválido!");
+              break;
+            default:
+              setMsg(
+                "Não foi possível realizar o cadastro. Tente novamente mais tarde!"
+              );
+          }
+        });
     }
     setEmail("");
     setPassword("");
@@ -128,6 +164,7 @@ export default function Register() {
                 autoComplete="email"
                 autoFocus
               />
+
               <TextField
                 onChange={(e) => setPassword(e.target.value)}
                 margin="normal"

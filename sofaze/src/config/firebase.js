@@ -1,25 +1,25 @@
-import { initializeApp } from 'firebase/app'
-import {getAuth} from 'firebase/auth'
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB5PxaDn1ruSMLMqkDwTguGg3OCJegZbKY",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
 
-  authDomain: "projeto-desenvolvimento-ii.firebaseapp.com",
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
 
-  databaseURL: "https://projeto-desenvolvimento-ii-default-rtdb.firebaseio.com",
+  databaseURL: process.env.REACT_APP_FIREBASE_DATA_BASE_URL,
 
-  projectId: "projeto-desenvolvimento-ii",
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
 
-  storageBucket: "projeto-desenvolvimento-ii.appspot.com",
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE,
 
-  messagingSenderId: "741444501806",
+  messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID,
 
-  appId: "1:741444501806:web:b775681b09134241aa3abf",
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
 
-  measurementId: "G-7RL61EEHMW",
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
-const app = initializeApp(firebaseConfig)
-const auth = getAuth(app)
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-export {auth}
+export { auth };

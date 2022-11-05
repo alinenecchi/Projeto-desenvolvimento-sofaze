@@ -19,6 +19,7 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import "./register.css";
 
 const theme = createTheme();
 
@@ -191,7 +192,7 @@ export default function Register() {
                 )}
               </Grid>
               <Grid item>
-                <Link to="/login" variant="body2">
+                <Link className="link" to="/login" variant="body2">
                   {"Já tem uma conta? Faça o login!"}
                 </Link>
               </Grid>

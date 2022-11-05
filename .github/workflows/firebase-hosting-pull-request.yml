@@ -10,12 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Setup Node.js environment
-        uses: actions/setup-node@v3.5.1
+        uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
-          cache: 'yarn'
-          cache-dependency-path: './sofaze/yarn.lock'
-      - run: npm run build
+          node-version: 18
+      - run: yarn install
+      - run: yarn run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'

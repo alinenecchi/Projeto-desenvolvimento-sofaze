@@ -12,12 +12,11 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-import { app } from "../../config/firebase";
+import "../../config/firebase";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
-
 import "./login.css";
+import { Alert } from "@mui/material";
 
 function Copyright(props) {
   return (
@@ -41,19 +40,19 @@ const theme = createTheme();
 
 export default function Login() {
   const [email, setEmail] = React.useState("");
-  const [senha, setSenha] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [msgType, setMsgType] = React.useState("");
 
   const auth = getAuth();
 
-
   function onLogin() {
-    signInWithEmailAndPassword(auth, email, senha)
-  .then(() => {
-    alert('Usuario logado')
-  })
-  .catch((error) => {
-    alert(error)
-  });
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        setMsgType("success");
+      })
+      .catch((error) => {
+        setMsgType("error");
+      });
   }
 
   const handleSubmit = (event) => {
@@ -134,19 +133,19 @@ export default function Login() {
                 autoFocus
               />
               <TextField
-                onChange={(e) => setSenha(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
                 margin="normal"
                 required
                 fullWidth
                 name="password"
-                label="Senha"
+                label="password"
                 type="password"
                 id="password"
                 autoComplete="current-password"
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
-                label="Lembrar senha"
+                label="Lembrar password"
               />
               <Button
                 type="button"
@@ -158,9 +157,47 @@ export default function Login() {
                 Entrar
               </Button>
               <Grid container>
+                {msgType === "success" && (
+                  <Alert
+                  fullWidth
+                  severity="success"
+                  sx={{
+                    width: "100%",
+                    height: "40px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <p>
+                    <strong>WoW! </strong>
+                    Você está conectado! &#128512;
+                  </p>
+                  </Alert>
+                )}
+                {msgType === "error" && (
+                  <Alert
+                    fullWidth
+                    severity="error"
+                    sx={{
+                      width: "100%",
+                      height: "40px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <p>
+                      <strong>Ops! </strong>
+                      Verifique se a senha ou usuário estão corretos!  &#128580;
+                    </p>
+                  </Alert>
+                )}
+              </Grid>
+              <Grid container mt={10}>
                 <Grid item xs>
                   <Link href="#" variant="body2">
-                    Esqueceu a senha?
+                    Esqueceu a password?
                   </Link>
                 </Grid>
                 <Grid item>

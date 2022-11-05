@@ -38,7 +38,9 @@ export default function Register() {
     if (password !== "" && confirmPassword !== "") {
       if (password !== confirmPassword) {
         isValid = false;
-        setError("Passwords does not match");
+        setMsgType('errorPasswordVerify')
+        setError("As senhas não correspondem.");
+        return
       }
     }
     return isValid;
@@ -152,7 +154,7 @@ export default function Register() {
             <Typography component="h1" variant="h5">
               Cadastro
             </Typography>
-            <Box component="form" onSubmit={register} noValidate sx={{ mt: 1 }}>
+            <Box component="form" noValidate sx={{ mt: 1 }}>
               <TextField
                 onChange={(e) => setEmail(e.target.value)}
                 margin="normal"
@@ -189,27 +191,30 @@ export default function Register() {
                 autoComplete="current-password"
               />
               <Button
-                type="submit"
+                type="button"
+                onClick={register}
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
                 Entrar
               </Button>
-              <Grid container>
-                {msgType === "success" && (
+              <Grid container mb="10px">
+                {msgType === "errorPasswordVerify" && (
                   <Alert
                     fullWidth
-                    severity="success"
+                    severity="error"
                     sx={{
                       width: "100%",
-                      height: "40px",
+                      height: "auto",
                       display: "flex",
-                      alignItems: "center",
+                      alignItems: "baseline",
                       justifyContent: "center",
+                      padding: "0 15px",
+                      fontSize: "14px",
                     }}
                   >
-                    <p>Usuário cadastrado com sucesso! &#128512;</p>
+                      <p>{error} &#128580;</p>
                   </Alert>
                 )}
                 {msgType === "error" && (
@@ -218,10 +223,12 @@ export default function Register() {
                     severity="error"
                     sx={{
                       width: "100%",
-                      height: "40px",
+                      height: "auto",
                       display: "flex",
-                      alignItems: "center",
+                      alignItems: "baseline",
                       justifyContent: "center",
+                      padding: "0 15px",
+                      fontSize: "14px",
                     }}
                   >
                     <p>{msg} &#128580;</p>

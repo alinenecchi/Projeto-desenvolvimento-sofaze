@@ -256,7 +256,6 @@ export default function Login() {
                       justifyContent: "center",
                       padding: "0 15px",
                       fontSize: "12px",
-                      textAlign: "center",
                     }}
                   >
                     <p>

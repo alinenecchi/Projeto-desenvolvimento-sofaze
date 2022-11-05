@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "sofaze-8e855"
-  }
+    "default": "sofaze-8e855",
+    "proj-sofaze": "projeto-desenvolvimento-ii"
+  },
+  "targets": {},
+  "etags": {}
 }

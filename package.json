@@ -11,6 +11,6 @@
     "buildDeploy": "yarn build && firebase deploy --only hosting"
   },
   "workspaces": [
-    "sofaze/*"
+    "sofaze"
   ]
 }

@@ -26,7 +26,8 @@ const theme = createTheme();
 export default function Register() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [msgType] = React.useState("");
+  const [msgType, setMsgType] = React.useState("");
+  const [msg, setMsg] = React.useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -186,7 +187,7 @@ export default function Register() {
                       justifyContent: "center",
                     }}
                   >
-                    <p>{error} &#128580;</p>
+                    <p>{msg} &#128580;</p>
                   </Alert>
                 )}
               </Grid>

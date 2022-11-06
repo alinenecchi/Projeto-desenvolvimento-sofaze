@@ -3,21 +3,15 @@ import { useAuthValue } from "../../auth-context";
 import {
   Avatar,
   Card,
-  createTheme,
   CssBaseline,
   Grid,
   Stack,
-  ThemeProvider,
   Typography,
 } from "@mui/material";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import CardContent from "@mui/material/CardContent";
-import Navbar from "../../components/nav-bar";
 import Layout from "../../components/layout";
-
-
-const theme = createTheme();
 
 function Profile() {
   const { currentUser } = useAuthValue();

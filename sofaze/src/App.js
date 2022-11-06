@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate,
 } from "react-router-dom";
 import Profile from "./view/profile";
 import Register from "./view/register";
@@ -18,7 +17,6 @@ import PrivateRoute from "./PrivateRoute";
 import { Provider } from "react-redux";
 import store from "../src/store";
 import RecoverPassword from "./view/recover-password";
-import Navbar from "./components/nav-bar";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);

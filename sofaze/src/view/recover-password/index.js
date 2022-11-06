@@ -1,43 +1,38 @@
 import * as React from "react";
-import { useState } from "react";
 import { auth } from "../../config/firebase";
-import {
-  createUserWithEmailAndPassword,
-  sendEmailVerification,
-  sendPasswordResetEmail,
-} from "firebase/auth";
-import { useAuthValue } from "../../auth-context";
+import { sendPasswordResetEmail } from "firebase/auth";
 
 import Avatar from "@mui/material/Avatar";
-import { Alert } from "@mui/material";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import { useNavigate, Link } from "react-router-dom";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Layout from "../../components/layout";
+import {
+  Alert,
+  Typography,
+  TextField,
+  Grid,
+  Box,
+  Paper,
+  Button,
+} from "@mui/material";
 
-const theme = createTheme();
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Layout from "../../components/layout";
+import { Link } from "react-router-dom";
 
 export default function RecoverPassword() {
   const [email, setEmail] = React.useState("");
   const [msgType, setMsgType] = React.useState("");
   const [msg, setMsg] = React.useState("");
 
-function recoverPassword() {
-    sendPasswordResetEmail(auth, email).then(result => {
-        setMsgType("success")
-        setMsg("Enviamos um link no seu email para você redefinir a sua senha")
-    }).catch(error => {
-        setMsgType("error")
-        setMsg("Verifique se o email está correto!")
-    })
-}
+  function recoverPassword() {
+    sendPasswordResetEmail(auth, email)
+      .then((result) => {
+        setMsgType("success");
+        setMsg("Enviamos um link no seu email para você redefinir a sua senha");
+      })
+      .catch((error) => {
+        setMsgType("error");
+        setMsg("Verifique se o email está correto!");
+      });
+  }
 
   return (
     <Layout>
@@ -129,7 +124,7 @@ function recoverPassword() {
                     <p>{msg} &#128580;</p>
                   </Alert>
                 )}
-                 {msgType === "success" && (
+                {msgType === "success" && (
                   <Alert
                     fullWidth
                     severity="success"

@@ -1,5 +1,4 @@
-import * as React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuthValue } from "../../auth-context";
 import {
@@ -7,6 +6,8 @@ import {
   sendEmailVerification,
 } from "firebase/auth";
 import { auth } from "../../config/firebase";
+
+import { useDispatch } from "react-redux";
 
 import {
   Alert,
@@ -51,6 +52,8 @@ export default function Login() {
     showPassword: false,
   });
 
+  const dispatch = useDispatch();
+
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
@@ -74,6 +77,7 @@ export default function Login() {
             .then(() => {
               setTimeActive(true);
               setMsgType("sucesso");
+              dispatch({ type: "LOG_IN", userEmail: email });
               navigate("/verify-email");
             })
             .catch((error) => {
@@ -84,6 +88,7 @@ export default function Login() {
               }
             });
         } else {
+          dispatch({ type: "LOG_IN", userEmail: email });
           navigate("/");
         }
       })
@@ -248,7 +253,7 @@ export default function Login() {
                 )}
               </Grid>
               <Grid className="container-link">
-                <Link className="link" href="#" variant="body2">
+                <Link className="link" to="/recover-password" variant="body2">
                   Esqueceu a senha?
                 </Link>
 

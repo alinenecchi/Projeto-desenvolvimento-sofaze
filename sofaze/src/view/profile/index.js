@@ -14,6 +14,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import CardContent from "@mui/material/CardContent";
 import Navbar from "../../components/nav-bar";
+import Layout from "../../components/layout";
 
 
 const theme = createTheme();
@@ -22,8 +23,7 @@ function Profile() {
   const { currentUser } = useAuthValue();
 
   return (
-    <ThemeProvider theme={theme}>
-      <Navbar />
+    <Layout>
       <Grid className="container" flexDirection="column" container padding={1}>
         <CssBaseline />
 
@@ -56,7 +56,7 @@ function Profile() {
           </Box>
         </Card>
       </Grid>
-    </ThemeProvider>
+    </Layout>
   );
 }
 

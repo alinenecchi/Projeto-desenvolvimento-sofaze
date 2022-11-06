@@ -18,6 +18,7 @@ import PrivateRoute from "./PrivateRoute";
 import { Provider } from "react-redux";
 import store from "../src/store";
 import RecoverPassword from "./view/recover-password";
+import Navbar from "./components/nav-bar";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -34,36 +35,18 @@ function App() {
       <Router>
         <AuthProvider value={{ currentUser, timeActive, setTimeActive }}>
           <Routes>
+            <Route exact path="/" element={<Home />} />
             <Route
               exact
-              path="/"
+              path="/profile"
               element={
                 <PrivateRoute>
                   <Profile />
                 </PrivateRoute>
               }
             />
-            <Route exact path="/home" element={<Home />} />
-            <Route
-              path="/login"
-              element={
-                !currentUser?.emailVerified ? (
-                  <Login />
-                ) : (
-                  <Navigate to="/" replace />
-                )
-              }
-            />
-            <Route
-              path="/register"
-              element={
-                !currentUser?.emailVerified ? (
-                  <Register />
-                ) : (
-                  <Navigate to="/" replace />
-                )
-              }
-            />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/verify-email" element={<VerifyEmail />} />
             <Route path="/recover-password" element={<RecoverPassword />} />
           </Routes>

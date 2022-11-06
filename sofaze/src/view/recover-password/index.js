@@ -20,6 +20,7 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Layout from "../../components/layout";
 
 const theme = createTheme();
 
@@ -39,14 +40,13 @@ function recoverPassword() {
 }
 
   return (
-    <ThemeProvider theme={theme}>
+    <Layout>
       <Grid
         className="container"
         container
         component="main"
         sx={{ height: "100vh" }}
       >
-        <CssBaseline />
         <Grid
           item
           xs={false}
@@ -156,6 +156,6 @@ function recoverPassword() {
           </Box>
         </Grid>
       </Grid>
-    </ThemeProvider>
+    </Layout>
   );
 }

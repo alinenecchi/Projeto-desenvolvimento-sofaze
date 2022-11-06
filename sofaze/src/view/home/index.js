@@ -1,9 +1,10 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import Layout from "../../components/layout";
 
 export default function Home() {
-  return <div>
-    home
-    <h1>{useSelector(state => state.userEmail)}</h1>
-    </div>;
+  return (
+    <Layout>
+      <h1>Home</h1>
+    </Layout>
+  );
 }

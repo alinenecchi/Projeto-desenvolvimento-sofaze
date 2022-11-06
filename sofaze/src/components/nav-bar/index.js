@@ -13,6 +13,7 @@ import DrawerComponent from "../drawer.js";
 import { Button } from "@mui/material";
 import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebase";
+import { useAuthValue } from "../../auth-context/index.js";
 
 const useStyles = makeStyles((theme) => ({
   navlinks: {
@@ -39,6 +40,7 @@ function Navbar() {
   const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const { currentUser } = useAuthValue();
 
   return (
     <AppBar position="static">
@@ -51,14 +53,33 @@ function Navbar() {
           <DrawerComponent />
         ) : (
           <div className={classes.navlinks}>
-            <Link to="/home" className={classes.link}>
-              Home
-            </Link>
-            <Link className={classes.link}>
-              <Button onClick={() => signOut(auth)} size="small">
-                Sair
-              </Button>
-            </Link>
+            {!currentUser?.emailVerified ? (
+              <>
+                <Link to="/" className={classes.link}>
+                  Home
+                </Link>
+                <Link to="/register" className={classes.link}>
+                  Cadastrar
+                </Link>
+                <Link to="/login" className={classes.link}>
+                  Login
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link to="/" className={classes.link}>
+                  Home
+                </Link>
+                <Link to="/profile" className={classes.link}>
+                  Perfil
+                </Link>
+                <Link className={classes.link}>
+                  <Button onClick={() => signOut(auth)} size="small">
+                    Sair
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
         )}
       </Toolbar>

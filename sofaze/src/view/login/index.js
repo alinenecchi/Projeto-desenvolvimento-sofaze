@@ -19,7 +19,6 @@ import {
 } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -30,12 +29,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Footer } from "../../components/footer";
-
+import Layout from "../../components/layout";
 import "./login.css";
-
-const theme = createTheme();
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -89,7 +85,7 @@ export default function Login() {
             });
         } else {
           dispatch({ type: "LOG_IN", userEmail: email });
-          navigate("/");
+          navigate("/profile");
         }
       })
       .catch((error) => {
@@ -121,14 +117,13 @@ export default function Login() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <Layout>
       <Grid
         className="container"
         container
         component="main"
-        sx={{ height: "100vh" }}
+        sx={{ height: "100%" }}
       >
-        <CssBaseline />
         <Grid
           item
           xs={false}
@@ -262,10 +257,10 @@ export default function Login() {
                 </Link>
               </Grid>
             </Box>
+            <Footer />
           </Box>
         </Grid>
       </Grid>
-      <Footer />
-    </ThemeProvider>
+    </Layout>
   );
 }

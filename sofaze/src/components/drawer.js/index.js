@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 
 import MenuIcon from "@material-ui/icons/Menu";
 import { Button } from "@mui/material";
+import { useAuthValue } from "../../auth-context";
 
 const useStyles = makeStyles(() => ({
   link: {
@@ -29,31 +30,60 @@ const useStyles = makeStyles(() => ({
 function DrawerComponent() {
   const classes = useStyles();
   const [openDrawer, setOpenDrawer] = useState(false);
+  const { currentUser } = useAuthValue();
   return (
     <>
       <Drawer open={openDrawer} onClose={() => setOpenDrawer(false)}>
         <List>
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/home" className={classes.link}>
-                Home
-              </Link>
-            </ListItemText>
-          </ListItem>
-          <Divider />
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/login" className={classes.link}>
-                Login
-              </Link>
-            </ListItemText>
-          </ListItem>
-          <Divider />
-     
+          {!currentUser?.emailVerified ? (
+            <>
+              <ListItem onClick={() => setOpenDrawer(false)}>
+                <ListItemText>
+                  <Link to="/" className={classes.link}>
+                    Home
+                  </Link>
+                </ListItemText>
+              </ListItem>
+              <Divider />
+              <ListItem onClick={() => setOpenDrawer(false)}>
+                <ListItemText>
+                  <Link to="/register" className={classes.link}>
+                    Cadastrar
+                  </Link>
+                </ListItemText>
+              </ListItem>
+              <Divider />
+              <ListItem onClick={() => setOpenDrawer(false)}>
+                <ListItemText>
+                  <Link to="/login" className={classes.link}>
+                  Login
+                  </Link>
+                </ListItemText>
+              </ListItem>
+            </>
+          ) : (
+            <>
+              <ListItem onClick={() => setOpenDrawer(false)}>
+                <ListItemText>
+                  <Link to="/" className={classes.link}>
+                    Home
+                  </Link>
+                </ListItemText>
+              </ListItem>
+              <ListItem onClick={() => setOpenDrawer(false)}>
+                <ListItemText>
+                  <Link to="/profile" className={classes.link}>
+                    Perfil
+                  </Link>
+                </ListItemText>
+              </ListItem>
+              <Divider />
+              <Button onClick={() => signOut(auth)} size="small">
+                Sair
+              </Button>
+            </>
+          )}
         </List>
-        <Button onClick={() => signOut(auth)} size="small">
-            Sair
-        </Button>
       </Drawer>
       <IconButton
         onClick={() => setOpenDrawer(!openDrawer)}

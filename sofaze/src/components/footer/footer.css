@@ -1,0 +1,13 @@
+.typography-footer {
+  display: flex;
+  min-height: 50px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.container-footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}

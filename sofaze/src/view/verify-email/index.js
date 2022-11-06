@@ -17,6 +17,7 @@ import Paper from "@mui/material/Paper";
 import MarkEmailReadOutlinedIcon from "@mui/icons-material/MarkEmailReadOutlined";
 
 import "./verifyEmail.css";
+import Navbar from "../../components/nav-bar";
 
 const theme = createTheme();
 
@@ -68,6 +69,7 @@ function VerifyEmail() {
 
   return (
     <ThemeProvider theme={theme}>
+      <Navbar/>
       <Grid
         className="container"
         container

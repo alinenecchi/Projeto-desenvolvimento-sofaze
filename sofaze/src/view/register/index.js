@@ -20,6 +20,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./register.css";
+import Navbar from "../../components/nav-bar";
+import Layout from "../../components/layout";
 
 const theme = createTheme();
 
@@ -38,9 +40,9 @@ export default function Register() {
     if (password !== "" && confirmPassword !== "") {
       if (password !== confirmPassword) {
         isValid = false;
-        setMsgType('errorPasswordVerify')
+        setMsgType("errorPasswordVerify");
         setError("As senhas não correspondem.");
-        return
+        return;
       }
     }
     return isValid;
@@ -104,14 +106,13 @@ export default function Register() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <Layout>
       <Grid
         className="container"
         container
         component="main"
         sx={{ height: "100vh" }}
       >
-        <CssBaseline />
         <Grid
           item
           xs={false}
@@ -214,7 +215,7 @@ export default function Register() {
                       fontSize: "14px",
                     }}
                   >
-                      <p>{error} &#128580;</p>
+                    <p>{error} &#128580;</p>
                   </Alert>
                 )}
                 {msgType === "error" && (
@@ -244,6 +245,6 @@ export default function Register() {
           </Box>
         </Grid>
       </Grid>
-    </ThemeProvider>
+    </Layout>
   );
 }

@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import Profile from "./view/profile";
 import Register from "./view/register";
 import VerifyEmail from "./view/verify-email";
@@ -8,6 +13,7 @@ import { AuthProvider } from "./auth-context";
 import { auth } from "./config/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import PrivateRoute from "./PrivateRoute";
+import Home from "./view/home";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -32,6 +38,7 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route exact path="/home" element={<Home />} />
           <Route
             path="/login"
             element={

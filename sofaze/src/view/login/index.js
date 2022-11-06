@@ -1,20 +1,21 @@
 import * as React from "react";
 import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuthValue } from "../../auth-context";
+import {
+  signInWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
+import { auth } from "../../config/firebase";
+
 import {
   Alert,
-  FilledInput,
   FormControl,
   IconButton,
   InputAdornment,
   InputLabel,
   OutlinedInput,
 } from "@mui/material";
-import {
-  signInWithEmailAndPassword,
-  sendEmailVerification,
-} from "firebase/auth";
-import { useNavigate, Link } from "react-router-dom";
-import { useAuthValue } from "../../auth-context";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -31,8 +32,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import "./login.css";
-import { auth } from "../../config/firebase";
-import { fontSize } from "@mui/system";
+
 
 function Copyright(props) {
   return (

@@ -13,7 +13,7 @@ import DrawerComponent from "../drawer.js";
 import { Button } from "@mui/material";
 import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebase";
-import { useAuthValue } from "../../auth-context/index.js";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   navlinks: {
@@ -40,7 +40,8 @@ function Navbar() {
   const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const { currentUser } = useAuthValue();
+  const logged = useSelector((state) => state.userLogged);
+  console.log(logged);
 
   return (
     <AppBar position="static">
@@ -53,7 +54,7 @@ function Navbar() {
           <DrawerComponent />
         ) : (
           <div className={classes.navlinks}>
-            {!currentUser?.emailVerified ? (
+            {logged === 0 ? (
               <>
                 <Link to="/" className={classes.link}>
                   Home
@@ -72,6 +73,9 @@ function Navbar() {
                 </Link>
                 <Link to="/profile" className={classes.link}>
                   Perfil
+                </Link>
+                <Link to="/register-event" className={classes.link}>
+                  Cadastrar evento
                 </Link>
                 <Link className={classes.link}>
                   <Button onClick={() => signOut(auth)} size="small">

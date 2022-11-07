@@ -1,9 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Profile from "./view/profile";
 import Register from "./view/register";
 import VerifyEmail from "./view/verify-email";
@@ -17,6 +13,7 @@ import PrivateRoute from "./PrivateRoute";
 import { Provider } from "react-redux";
 import store from "../src/store";
 import RecoverPassword from "./view/recover-password";
+import EventRegister from "./view/event-register";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -43,6 +40,7 @@ function App() {
                 </PrivateRoute>
               }
             />
+            <Route exact path="/register-event" element={<EventRegister />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/verify-email" element={<VerifyEmail />} />

@@ -14,7 +14,8 @@ import { Link } from "react-router-dom";
 
 import MenuIcon from "@material-ui/icons/Menu";
 import { Button } from "@mui/material";
-import { useAuthValue } from "../../auth-context";
+
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles(() => ({
   link: {
@@ -30,12 +31,14 @@ const useStyles = makeStyles(() => ({
 function DrawerComponent() {
   const classes = useStyles();
   const [openDrawer, setOpenDrawer] = useState(false);
-  const { currentUser } = useAuthValue();
+
+  const logged = useSelector((state) => state.userLogged);
+  console.log(logged);
   return (
     <>
       <Drawer open={openDrawer} onClose={() => setOpenDrawer(false)}>
         <List>
-          {!currentUser?.emailVerified ? (
+          {logged === 0 ? (
             <>
               <ListItem onClick={() => setOpenDrawer(false)}>
                 <ListItemText>
@@ -56,7 +59,7 @@ function DrawerComponent() {
               <ListItem onClick={() => setOpenDrawer(false)}>
                 <ListItemText>
                   <Link to="/login" className={classes.link}>
-                  Login
+                    Login
                   </Link>
                 </ListItemText>
               </ListItem>
@@ -74,6 +77,14 @@ function DrawerComponent() {
                 <ListItemText>
                   <Link to="/profile" className={classes.link}>
                     Perfil
+                  </Link>
+                </ListItemText>
+              </ListItem>
+              <Divider />
+              <ListItem onClick={() => setOpenDrawer(false)}>
+                <ListItemText>
+                  <Link to="/register-event" className={classes.link}>
+                    Cadastrar evento
                   </Link>
                 </ListItemText>
               </ListItem>

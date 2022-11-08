@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuthValue } from "../../auth-context";
 import Layout from "../../components/layout";
+import { useSelector } from "react-redux";
 import {
   Autocomplete,
   Box,
@@ -19,6 +20,10 @@ export default function EventRegister() {
   const [value, setValue] = React.useState(options[0]);
   const [inputValue, setInputValue] = React.useState("");
 
+  const logged = useSelector((state) => state.userLogged);
+  console.log(logged);
+  console.log(currentUser);
+
   const handleChange = (event) => {
     setValue(event.target.value);
   };
@@ -33,7 +38,7 @@ export default function EventRegister() {
           component="h1"
           variant="h4"
         >
-          Cadastro de Eventos
+        Cadastro de Eventos
         </Typography>
         {currentUser?.emailVerified && (
           <Typography
@@ -90,6 +95,7 @@ export default function EventRegister() {
               <TextField
                 id="description"
                 label="Descrição do evento"
+                required
                 multiline
                 maxRows={4}
                 //value={value}
@@ -100,7 +106,12 @@ export default function EventRegister() {
 
             <FormControl variant="standard">
               <FormLabel>Data:</FormLabel>
-              <TextField type="date" variant="outlined" />
+              <TextField type="date" variant="outlined" required />
+            </FormControl>
+
+            <FormControl variant="standard">
+              <FormLabel>Documento:</FormLabel>
+              <TextField type="file" variant="outlined" />
             </FormControl>
           </Stack>
         </Box>

@@ -54,7 +54,7 @@ function Navbar() {
           <DrawerComponent />
         ) : (
           <div className={classes.navlinks}>
-            {logged === 0 ? (
+            {logged === 0 && (
               <>
                 <Link to="/" className={classes.link}>
                   Home
@@ -66,7 +66,8 @@ function Navbar() {
                   Login
                 </Link>
               </>
-            ) : (
+            )}
+            {logged === 1 && (
               <>
                 <Link to="/" className={classes.link}>
                   Home

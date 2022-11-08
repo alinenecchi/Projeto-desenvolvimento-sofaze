@@ -38,7 +38,7 @@ function DrawerComponent() {
     <>
       <Drawer open={openDrawer} onClose={() => setOpenDrawer(false)}>
         <List>
-          {logged === 0 ? (
+          {logged === 0 && (
             <>
               <ListItem onClick={() => setOpenDrawer(false)}>
                 <ListItemText>
@@ -64,7 +64,8 @@ function DrawerComponent() {
                 </ListItemText>
               </ListItem>
             </>
-          ) : (
+          )}
+          {logged === 0 && (
             <>
               <ListItem onClick={() => setOpenDrawer(false)}>
                 <ListItemText>
